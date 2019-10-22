@@ -3,7 +3,7 @@
  * @Author: 小鱼
  * @Date: 2019-10-21 15:52:50
  * @LastEditors: 小鱼
- * @LastEditTime: 2019-10-21 20:25:20
+ * @LastEditTime: 2019-10-22 18:59:41
  */
 
 // 继承
@@ -26,3 +26,5 @@ Teacher.prototype.books = function() {
     console.log(this.name + this.book)
 }
 new Teacher('qzy', 'js').books()// qzyjs
+
+
