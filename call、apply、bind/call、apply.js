@@ -3,7 +3,7 @@
  * @Author: 小鱼
  * @Date: 2019-10-21 17:59:02
  * @LastEditors: 小鱼
- * @LastEditTime: 2019-10-21 19:44:49
+ * @LastEditTime: 2019-11-13 17:41:04
  */
 // 类数组借用数组的方法
 let person = {
@@ -15,8 +15,9 @@ console.log(person) // { '0': 'qzy1', '1': 'qzy2', name: 'qzy', age: 16, length:
 
 // 获取数组最大值最小值
 let ageArr = [15, 1, 3, 5, 8, 10, 11, 9, 72, 2]
-console.log(Math.max.apply(Math, ageArr))// 72
-console.log(Math.min.apply(Math, ageArr))// 1
+console.log(Math.max(...ageArr))// 72
+console.log(Math.max.apply(null, ageArr))// 72
+console.log(Math.min.apply(null, ageArr))// 1
 
 // 继承
 
@@ -47,7 +48,8 @@ log1(1, 2) // 1 2
 
 // 接下来的要求是给每一个 log 消息添加一个"(app)"的前辍，
 function log2() {
-    let args = Array.prototype.slice.call(arguments)
+    // 转化为数组
+    let args = [].slice.call(arguments)
     args.unshift('(app)')
     console.log.apply(console, args)
 }
