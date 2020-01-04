@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>post</title>
+</head>
+
+<body>
+	<!-- 
+	 采用 POST 方法，浏览器将会按照下面两步来发送数据。首先，浏览器将与 action 属性中指定的表单处理服务器建立联系，一旦建立连接之后，浏览器就会按分段传输的方法将数据发送给服务器
+	 一旦 POST 样式的应用程序开始执行时，就应该从一个标志位置读取参数，而一旦读到参数，在应用程序能够使用这些表单值以前，必须对这些参数进行解码。用户特定的服务器会明确指定应用程序应该如何接受这些参数
+	 -->
+    <form action="http://localhost:8080/login" method="post">
+        <div>
+            用户名：<input type="text" name="user" value="123 !~" /> </div>
+        <div>
+            密码:<input type="password" name="password" value="123 !~" />
+        </div>
+        <input type="submit" value="登录" />
+    </form>
+</body>
+
+</html>

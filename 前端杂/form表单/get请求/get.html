@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>get请求</title>
+</head>
+
+<body>
+    <!--
+			method 属性规定如何发送表单数据（表单数据发送到 action 属性所规定的页面）
+			表单数据可以作为 URL 变量（method="get"）或者 HTTP post （method="post"）的方式来发送
+			GET 方法，浏览器会与表单处理服务器建立连接，然后直接在一个传输步骤中发送所有的表单数据
+			浏览器会将数据直接附在表单的 action URL 之后。这两者之间用问号进行分隔
+		-->
+
+    <!--
+			enctype 属性规定在发送到服务器之前应该如何对表单数据进行编码
+			application/x-www-form-urlencoded\multipart/form-data\text/plain(适用于 method="post" 的情况)
+			默认地，表单数据会编码为 "application/x-www-form-urlencoded"。就是说，在发送到服务器之前，所有字符都会进行编码 空格转换为 "+" 加号，特殊符号转换为 ASCII HEX 值
+		-->
+
+    <!--
+			比如：用户名：123 !~ 密码  123 !~ 会转化   method=get enctype 默认
+			浏览器地址显示  http://localhost:8080/login?user=123+%21~&password=123+%21~
+			接口显示            Request URL: http://localhost:8080/login?user=123+%21%7E&password=123+%21%7E
+			后端返回            user is:123 !~,password is:123 !~
+		-->
+    <form action="http://localhost:8080/login" method="get">
+        <div>
+            用户名：<input type="text" name="user" value="123 !~" /> </div>
+        <div>
+            密码:<input type="password" name="password" value="123 !~" />
+        </div>
+        <input type="submit" value="登录" />
+    </form>
+
+</body>
+
+</html>
