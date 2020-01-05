@@ -1,23 +1,42 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta charset="UTF-8">
-    <title>post</title>
-</head>
-
-<body>
-    <form action="http://localhost:8080/login" method="post" enctype="multipart/form-data">
-        <div>
-            用户名：<input type="text" name="user" value="123 !~" /> </div>
-        <div>
-            密码:<input type="password" name="password" value="123 !~" />
-        </div>
-		<div>
-		    头像:<input type="file" name="file"  />
-		</div>
-        <input type="submit" value="登录" />
-    </form>
-</body>
-
+	<head>
+		<meta charset="UTF-8">
+		<title>post</title>
+	</head>
+	<!-- 
+	选取本目录下的post.txt文件 后台接收到的数据格式如下
+	
+	我们在后台将如下文件处理之后得到name、password、file
+	下面的\r\n 是为了方面查看添加的
+	
+	------WebKitFormBoundaryfJ8K0xbi8VSVNWTx\r\n
+	Content-Disposition: form-data; name="user"\r\n
+	\r\n
+	123 !~\r\n
+	------WebKitFormBoundaryfJ8K0xbi8VSVNWTx\r\n
+	Content-Disposition: form-data; name="password"\r\n
+	\r\n
+	123 !~\r\n
+	------WebKitFormBoundaryfJ8K0xbi8VSVNWTx\r\n
+	Content-Disposition: form-data; name="file"; filename="post.txt"\r\n
+	Content-Type: text/plain\r\n
+	\r\n
+	1234\r\n
+	------WebKitFormBoundaryfJ8K0xbi8VSVNWTx--\r\n
+ -->
+	<body>
+		<form action="http://localhost:8080/login" method="post" enctype="multipart/form-data">
+			<div>
+				用户名：<input type="text" name="user" value="123 !~" /> </div>
+			<div>
+				密码:<input type="password" name="password" value="123 !~" />
+			</div>
+			<div>
+				头像:<input type="file" name="file" />
+			</div>
+			<input type="submit" value="登录" />
+		</form>
+	</body>
 </html>
