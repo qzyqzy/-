@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<style>
+		ul,
+		li,
+		div,
+		p {
+			margin: 0;
+			padding: 0;
+		}
+
+		ul {
+			width: 500px;
+			height: 500px;
+			margin: 30px auto;
+		}
+
+		li {
+			float: left;
+			padding: 20px;
+			text-align: center;
+			list-style: none;
+		}
+
+		/* background-position 是负值 */
+		/* 默认是0 0  显示的是第一个图标 要想显示到具体的图标 需要移动图片的位置 */
+		li div {
+			display: inline-block;
+			width: 24px;
+			height: 24px;
+			padding: 5px 0;
+			background: url(bg.png) 0 0 no-repeat;
+		}
+
+		.div-2 {
+			background-position: 0 -88px;
+		}
+
+		.div-3 {
+			background-position: 0 -44px;
+		}
+	</style>
+	<body>
+		<ul>
+			<li>
+				<div></div>
+				<p>充话费</p>
+			</li>
+			<li>
+				<div class="div-2"></div>
+				<p>旅行</p>
+			</li>
+			<li>
+				<div class="div-3"></div>
+				<p>车险</p>
+			</li>
+		</ul>
+	</body>
+</html>
