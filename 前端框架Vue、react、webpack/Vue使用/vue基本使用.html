@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>vue</title>
+	</head>
+	<script src="../dist/vue.js"></script>
+	<body>
+		<div id="app">
+			<h3>插值</h3>
+			<p><span>Message: {{ msg }}</span></p>
+			<p>v-once 指令 执行一次性地插值 当数据改变时，插值处的内容不会更新</p>
+			<p><span>count的值: {{ count }}</span></p>
+			<p v-once><span> v-once count的值: {{ count }}</span></p>
+			<p v-html="html">
+				会导致xss 跨站脚本攻击
+				会覆盖此内容
+			</p>
+			<div :id="id">{{id}}</div>
+			<p>class style</p>
+			<p>style 驼峰写法</p>
+		</div>
+	</body>
+	<script>
+		new Vue({
+			el: '#app',
+			data() {
+				return {
+					msg: '信息',
+					count: 0,
+					html: '<span style="color:red">红字</span>',
+					id: `id_${Date.now()}`
+				}
+			},
+			created() {
+				this.setCountData()
+			},
+			methods: {
+				setCountData() {
+					setInterval(() => {
+						this.count += 1
+					}, 1000)
+				}
+			}
+		})
+	</script>
+</html>
