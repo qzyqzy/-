@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>vue</title>
+	</head>
+	<script src="../dist/vue.js"></script>
+	<body>
+		<div id="app">
+			<h3>事件名不存在大小写转化 保持一致即可</h3>
+			<h3>推荐是有短横线分隔命名 kebab-case</h3>
+			<my-component @add-count="addCount"></my-component>
+		</div>
+	</body>
+	<script>
+		Vue.component('my-component', {
+			template: `
+			<div>
+				<button @click="$emit('add-count')">点击触发</button>
+			</div>`
+		})
+		new Vue({
+			el: '#app',
+			methods: {
+				addCount() {
+					alert('addCount')
+				}
+			}
+		})
+	</script>
+</html>

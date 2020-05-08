@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>vue</title>
+	</head>
+	<script src="../dist/vue.js"></script>
+	<body>
+		<div id="app">
+			<h3>vue是异步更新 数据改变后 dom 不会理解渲染 $nextTick会在dom渲染完后触发</h3>
+			<div id="nextTick" ref="nextTick">
+				{{count}}
+			</div>
+			<button type="button" @click="onBtn">加一</button>
+		</div>
+	</body>
+	<script>
+		new Vue({
+			el: '#app',
+			data() {
+				return {
+					count: 0,
+				}
+			},
+			methods: {
+				onBtn() {
+					this.count++
+					console.log(this.count) // 1
+					let dom = this.$refs.nextTick
+					console.log(dom.innerHTML) // 0
+					this.$nextTick(() => {
+						console.log(dom.innerHTML) // 1
+					})
+
+				}
+
+			}
+		})
+	</script>
+</html>

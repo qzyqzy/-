@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>vue</title>
+	</head>
+	<script src="../dist/vue.js"></script>
+	<body>
+		<div id="app">
+			<h3>不使用v-model的父子组件通信</h3>
+			<child-component data="我来自父组件" @child-click="onClick"></child-component>
+
+			<h3>组件的v-model</h3>
+			<p>v-model="data" 相当于 :data="data"</p>
+			<p>当子组件触发child-click并返回一个新值时 pData的值将会被更新</p>
+			<child-component-model v-model="pData"></child-component-model>
+		</div>
+	</body>
+	<script>
+		// 不使用v-model
+		Vue.component('child-component', {
+			props: ['data'],
+			template: `<div>
+				<p>父组件传递来的数据为:{{data}}</p>
+				<button @click="onClick">点击传递事件给父组件 传递的信息为 '子组件'</button>
+			</div>`,
+			methods: {
+				onClick() {
+					this.$emit('child-click', '子组件')
+				}
+			}
+		})
+		// 使用v-model
+		Vue.component('child-component-model', {
+			// 缺一不可
+			props: ['data'],
+			// v-model
+			model: {
+				prop: 'data',
+				event: 'child-click'
+			},
+			template: `<div>
+				<p>父组件传递来的数据为:{{data}}</p>
+				<button @click="onClick">点击传递事件给父组件 传递的信息为 '子组件'</button>
+			</div>`,
+			methods: {
+				onClick() {
+					this.$emit('child-click', '子组件')
+				}
+			}
+		})
+		new Vue({
+			el: '#app',
+			data() {
+				return {
+					pData: '我来自父组件'
+				}
+			},
+			methods: {
+				onClick(val) {
+					alert(val)
+				}
+			}
+		})
+	</script>
+</html>

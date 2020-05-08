@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>vue</title>
+	</head>
+	<script src="../dist/vue.js"></script>
+	<body>
+		<div id="app">
+			<h4>
+				HTML 中的 attribute 名是大小写不敏感的
+				浏览器会把所有大写字符解释为小写字符
+				camelCase (驼峰命名法) 的 prop 名需要使用其等价的 kebab-case (短横线分隔命名) 命名
+			</h4>
+			<div>
+				<!-- 正确的写法 -->
+				<blog-post post-title="hello! post-title"></blog-post>
+				<!-- 下面两个都会正确显示 -->
+				<blog-post posttitle="hello! posttitle"></blog-post>
+				<blog-post postTitle="hello! postTitle"></blog-post>
+			</div>
+			<h4>类型、验证、默认值</h4>
+			<div>
+				<my-component prop-c="200"></my-component>
+				<my-component prop-c="300" prop-d="11"></my-component>
+			</div>
+		</div>
+	</body>
+	<script>
+		Vue.component('blog-post', {
+			// 在 JavaScript 中是 camelCase 的
+			props: ['postTitle'],
+			template: '<h3>{{ postTitle }}</h3>'
+		})
+		Vue.component('my-component', {
+			props: {
+				// 基础的类型检查 (`null` 和 `undefined` 会通过任何类型验证)
+				propB: {
+					type: [String, Number],
+					default: 100
+				},
+				propC: {
+					// 必填
+					required: true
+				},
+				propD: {
+					// 自定义校验
+					// 必须大于10
+					validator(value) {
+						return value > 10
+					}
+				}
+			},
+			template: '<div><h3>propB:{{ propB }}</h3><h3>propC:{{ propC }}</h3><h3>propD:{{ propD }}</h3></div>'
+		})
+		new Vue({
+			el: '#app'
+		})
+	</script>
+</html>

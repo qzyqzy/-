@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>vue</title>
+	</head>
+	<script src="../dist/vue.js"></script>
+	<body>
+		<div id="app">
+			<h3>单个文件的生命周期</h3>
+			<div>
+				<p>挂载阶段 beforeCreate created beforeMount mounted</p>
+				<p>更新阶段 beforeUpdate updated </p>
+				<p>销毁阶段 beforeDestroy destroyed</p>
+			</div>
+			<h3>父子组件的生命周期</h3>
+			<div>
+				<my-component></my-component>
+			</div>
+			<div>
+				<p>挂载阶段 父beforeCreate 父created 父beforeMount 子beforeCreate 子created 子beforeMount 子mounted 父mounted</p>
+				<p>更新阶段 父beforeUpdate->子beforeUpdate->子updated->父updated</p>
+				<p>销毁阶段 父beforeDestroy->子beforeDestroy->子destroyed->父destroyed</p>
+			</div>
+		</div>
+	</body>
+	<script>
+		Vue.component('my-component', {
+			template: `<div>my-component</div>`,
+			beforeCreate() {
+				console.log('子beforeCreate')
+			},
+			created() {
+				console.log('子created')
+			},
+			beforeMount() {
+				console.log('子beforeMount')
+			},
+			mounted() {
+				console.log('子mounted')
+			},
+			beforeDestroy() {
+				console.log('子beforeDestroy')
+			},
+			destroyed() {
+				console.log('子destroyed')
+			}
+		})
+		new Vue({
+			el: '#app',
+			beforeCreate() {
+				console.log('父beforeCreate')
+			},
+			created() {
+				console.log('父created')
+			},
+			beforeMount() {
+				console.log('父beforeMount')
+			},
+			mounted() {
+				console.log('父mounted')
+			},
+			beforeDestroy() {
+				console.log('父beforeDestroy')
+			},
+			destroyed() {
+				console.log('父destroyed')
+			}
+		})
+	</script>
+</html>

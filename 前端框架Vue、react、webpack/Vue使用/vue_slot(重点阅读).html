@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>vue</title>
+	</head>
+	<script src="../dist/vue.js"></script>
+	<body>
+		<div id="app">
+			<h3>插槽</h3>
+			<h3>在 2.6.0 中，我们为具名插槽和作用域插槽引入了一个新的统一的语法 (即 v-slot 指令)</h3>
+			<h3>vue 3.0 不再支持</h3>
+			<h4>不使用插槽的组件中间的任何内容都会被抛弃</h4>
+			<a-b>a-b中间插入内容</a-b>
+			<h4>使用插槽</h4>
+			<a-c>a-c中间插入内容</a-c>
+			<h4>编译作用域、默认值（后备内容）</h4>
+			<div>父级模板里的所有内容都是在父级作用域中编译的；子模板里的所有内容都是在子作用域中编译的</div>
+			<a-d></a-d>
+			<a-d>{{user}}</a-d>
+			<h3>具名插槽</h3>
+			<a-e>
+				<div slot="header">我是header</div>
+				<div>我是mian</div>
+				<div slot="footer">我是footer</div>
+			</a-e>
+			<p>v-slot 注意 v-slot 只能添加在 template 上 (只有一种例外情况)</p>
+			<a-e>
+				<template v-slot:header>
+					<div>我是header</div>
+				</template>
+				<div>我是mian</div>
+				<template v-slot:footer>
+					<div>我是footer</div>
+				</template>
+			</a-e>
+			<p>缩写</p>
+			<a-e>
+				<template #header>
+					<div>我是header</div>
+				</template>
+				<div>我是mian</div>
+				<template #footer>
+					<div>我是footer</div>
+				</template>
+			</a-e>
+			<h3>动态插槽名</h3>
+			<a-e>
+				<div :slot="footSlot">我是footer</div>
+			</a-e>
+			<p>不要 #= user</p>
+			<a-e>
+				<template #footer>
+					<div>我是footer</div>
+				</template>
+			</a-e>
+			<h3>作用域插槽</h3>
+			<h4>在父组件使用子组件的数据 slotProps</h4>
+			<a-h v-slot="slotProps"></a-h>
+			<a-h v-slot="slotProps">
+				{{slotProps.slotData.name}}
+			</a-h>
+		</div>
+	</body>
+	<script>
+		// 未使用插槽
+		Vue.component('a-b', {
+			template: '<div>我是a-b</div>'
+		})
+		// 使用插槽
+		Vue.component('a-c', {
+			template: `
+			<div>
+				我是a-c
+				<div><slot></slot></div>
+			</div>`
+		})
+		// 编译作用域
+		// 默认值
+		Vue.component('a-d', {
+			template: `
+			<div>
+				我是a-d
+				<div><slot>默认内容</slot></div>
+			</div>`
+		})
+		// 具名插槽
+		// 一个不带 name 的 <slot> 出口会带有隐含的名字“default”。
+		Vue.component('a-e', {
+			template: `
+			<div>
+				<header>
+					<slot name="header"></slot>
+				</header>
+				<main>
+					<slot></slot>
+				</main>
+				<footer>
+					<slot name="footer"></slot>
+				</footer>
+			</div>`
+		})
+		// 作用域插槽
+		Vue.component('a-h', {
+			template: `
+			<div>
+				<slot :slotData="user">默认name是123</slot>
+			</div>`,
+			data(){
+				return {
+					user:{
+						name:'qzy'
+					}
+				}
+			}
+		})
+		new Vue({
+			el: '#app',
+			data() {
+				return {
+					user: 'user数据',
+					footSlot: 'footer'
+				}
+			}
+		})
+	</script>
+</html>
