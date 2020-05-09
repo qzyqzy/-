@@ -1,10 +1,3 @@
-/*
- * @Description: 属性类型
- * @Author: 小鱼
- * @Date: 2019-11-02 19:10:26
- * @LastEditors: 小鱼
- * @LastEditTime: 2019-11-02 19:45:18
- */
 // 属性类型（数据属性和访问器属性）
 
 

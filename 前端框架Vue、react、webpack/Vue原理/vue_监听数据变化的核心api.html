@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>vue</title>
+	</head>
+	<script src="../dist/vue.js"></script>
+	<body>
+		<div id="app">
+			<h3>Object.defineProperty</h3>
+
+			<h4>缺点</h4>
+			<div>
+				深度监听需要递归到底 一次性计算量大
+				无法监听新增与删除属性 所以需要Vue.set Vue.delete
+				无法监听数组 需要特殊处理
+			</div>
+		</div>
+	</body>
+	<script>
+		// 数组劫持
+		let arrayProto = Array.prototype;
+		let arrayMethods = Object.create(arrayProto);
+		var methodsToPatch = [
+			'push',
+			'pop',
+			'shift',
+			'unshift',
+			'splice',
+			'sort',
+			'reverse'
+		];
+		for (let key of methodsToPatch) {
+			arrayMethods[key] = function() {
+				updateView(arguments, key, arguments)
+				arrayProto[key].apply(this, arguments)
+			}
+		}
+
+		function updateView(val, type, newVal) {
+			console.log(val, `数据：${val}、触发${type}更新、新值: ${newVal}`)
+		}
+
+		function defineReactive(obj, key, val) {
+			// val可能还是一个对象 此时需深度监听
+			observe(val)
+
+			Object.defineProperty(obj, key, {
+				enumerable: true, // 可枚举
+				configurable: true, // 可删除
+				get() {
+					return val
+				},
+				set(newVal) {
+					// value 一直在闭包中 设置完之后再获取的是最新值
+					if (newVal !== val) {
+						// 设置新值的时候 也有可能是个对象 也要深度监听
+						observe(newVal)
+						updateView(obj[key], 'set', newVal)
+						val = newVal
+					}
+				}
+			})
+		}
+		// 监听对象属性
+		function observe(target) {
+			// 不是对象或者数组 
+			if (typeof target !== 'object' || target === null) {
+				return target
+			}
+			// 数组劫持
+			if (Array.isArray(target)) {
+				target.__proto__ = arrayMethods
+			}
+			// 重新定义各个属性
+			for (let key in target) {
+				defineReactive(target, key, target[key])
+			}
+		}
+		let data = {
+			name: 'qzy',
+			skill: {
+				best: 'best'
+			},
+			list: []
+		}
+		// 监听数据
+		observe(data)
+
+		// 简单对象属性 
+		// data.name = 'qzy1'
+
+		// 深度监听
+		// data.skill.best = 'good'
+
+		// 赋值的新值为对象
+		// data.skill = {
+		// 	good: 'good'
+		// }
+		// data.skill.good = 'better'
+
+		// defineProperty 不支持数组
+
+		data.list.push(2)
+	</script>
+</html>
