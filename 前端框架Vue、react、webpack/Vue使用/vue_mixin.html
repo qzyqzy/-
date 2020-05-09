@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>vue</title>
+	</head>
+	<script src="../dist/vue.js"></script>
+	<body>
+		<div id="app">
+			<div>多个组件有共同的逻辑</div>
+			<h3>mix1</h3>
+			<div>mix1中存在的数组{{countList}}</div>
+			<h3>选项合并</h3>
+			<h5>当组件和混入对象含有同名选项时，这些选项将以恰当的方式进行“合并”、在发生冲突时以组件数据优先</h5>
+			<div>count都存在 此时显示的是组件中的值 {{count}}</div>
+			<div>同名钩子函数将合并为一个数组，因此都将被调用。另外，混入对象的钩子将在组件自身钩子之前调用</div>
+			<h3>全局混入</h3>
+			<div>全局混入 局部混入  当前 顺序执行</div>
+			<h3>存在的问题</h3>
+			<div>
+				变量来源不明确 不利于阅读
+				多个mixin 命名冲突
+				mixin与组件可能存在多对多的关系 复杂度较高
+			</div>
+		</div>
+	</body>
+	<script>
+		// 定义混入对象
+		let mix1={
+			created(){
+				this.initData()
+			},
+			data(){
+				return {
+					count:0,
+					countList:[]
+				}
+			},
+			methods:{
+				initData(){
+					this.countList=[1,2,3]
+					count=this.countList.length
+					console.log(this.countList)
+				}
+			}
+		}
+		// 全局混入
+		Vue.mixin({
+			created(){
+				console.log('全局混入')
+			}
+		})
+		new Vue({
+			mixins:[mix1],
+			el: '#app',
+			data(){
+				return {
+					count:'count'
+				}
+			},
+			created(){
+				console.log('app created')
+			}
+		})
+	</script>
+</html>

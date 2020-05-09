@@ -7,12 +7,48 @@
 	<script src="../dist/vue.js"></script>
 	<body>
 		<div id="app">
-			<h3></h3>
+			<h3>动态组件</h3>
+			<h4>使用is来切换不同的组件</h4>
+			<h4>使用场景 组件类型不确定的场景</h4>
+			<button @click="status=!status">点击切换不同的组件 当前组件{{currentItem}}</button>
+			<p>此动态组件切换时会重新创建不会缓存</p>
+			<component :is="currentItem"></component>
+			<h3>使用keep-alive缓存组件</h3>
+			<h4>这个 keep-alive 要求被切换到的组件都有自己的名字</h4>
+			<keep-alive>
+				<component :is="currentItem"></component>
+			</keep-alive>
 		</div>
 	</body>
 	<script>
+		Vue.component('tab-a', {
+			name: 'tabA',
+			template: `
+			<div>
+				<input type="number"> number
+			</div>
+			`
+		})
+		Vue.component('tab-b', {
+			name: 'tabB',
+			template: `
+			<div>
+				<input type="text"> text
+			</div>
+			`
+		})
 		new Vue({
-			el: '#app'
+			el: '#app',
+			data() {
+				return {
+					status: false
+				}
+			},
+			computed: {
+				currentItem() {
+					return val = this.status ? 'tab-a' : 'tab-b'
+				}
+			}
 		})
 	</script>
 </html>
