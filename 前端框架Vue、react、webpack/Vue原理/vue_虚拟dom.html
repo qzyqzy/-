@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>vue</title>
+	</head>
+	<body>
+		<div id="app">
+			<h3></h3>
+		</div>
+	</body>
+	<script>
+		// vdom 是实现vue react 的重要基石
+		// diff算法又是vdom最核心、最关键的代码
+		// js 操作真实dom的代价
+		ele=document.createElement('div')
+		let keys=''
+		for(let key in ele){
+			keys+=`、${key}`
+		}
+		// dom上包含的属性
+		console.log(keys)
+		
+		// 1 操作dom是很耗费性能
+		// 2 多次连续更新dom时 每次浏览器都会计算
+		
+		// vdom的好处
+		
+		// 用js模拟dom结构、计算出最小的变更，操作dom
+		// js 执行速度很快
+	</script>
+</html>
