@@ -1,0 +1,15 @@
+.box {
+  width: 10px;
+}
+.big-img {
+  width: 1000px;
+}
+.height {
+  height: 300px;
+}
+body {
+  background: #ccc url('../imgage/nav.png') no-repeat;
+}
+body .footer div {
+  height: 300px;
+}

@@ -1,0 +1,62 @@
+.title {
+  font-weight: 700;
+  color: red;
+}
+.nav a {
+  text-align: center;
+  font-weight: 700;
+  color: red;
+}
+.footer a {
+  font-weight: 700;
+  color: red;
+  text-align: left;
+}
+.content p {
+  font-weight: 700;
+  color: red;
+}
+.button:hover {
+  color: red;
+}
+.div {
+  border: 1px solid red;
+}
+.div-b {
+  border: 10px solid #000;
+}
+.div-margin {
+  font-size: 10px;
+  margin: 5px;
+}
+.div-margin1 {
+  font-size: 10px;
+  margin: 6px;
+}
+.div-margin2 {
+  font-size: 10px;
+  margin: 7px;
+}
+.div-margin3 {
+  font-size: 10px, 7px;
+  margin: 8px;
+}
+.div-more {
+  color: red;
+  font-size: 10px;
+}
+.div-mix2 {
+  color: red;
+  font-size: 20px;
+  color: 30px;
+  font-size: 10px;
+}
+.div-mix3 {
+  border: 1px solid red;
+}
+.div-mix4 {
+  border-left: 20px;
+}
+.div-mix5 {
+  margin: 15px;
+}

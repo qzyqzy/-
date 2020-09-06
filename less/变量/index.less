@@ -1,0 +1,40 @@
+// 变量 对象定义类似
+// 变量定义分号结尾 
+
+// 普通变量
+@width:10px;
+@img-width:1000px;
+
+// 变量可以先使用再声明
+.box{
+    width: @width;
+}
+
+// 属性名 @{} + 变量名
+@my-select:big-img;
+@height:height;
+
+.@{my-select}{
+     width: @img-width;
+}
+.@{height}{
+    @{height}:300px;
+}
+
+// 作为url
+@images:'./../imgage';
+body{
+    background: #ccc url('@{images}/nav.png') no-repeat;
+}
+
+// 定义多个变量时 会从当前作用域往上搜索
+
+body{
+    .footer{
+        // 重新定义height
+        @height:300px;
+        div{
+            height: @height;
+        }
+    }
+}

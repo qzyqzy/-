@@ -1,0 +1,71 @@
+// 比较运算符
+// <、>、<=、>=、=  true(只有true关键字代表true,其余均为false)
+
+.mix(@a) when (@a>20px) {
+    color: red;
+}
+
+.color {
+    .mix(30)
+}
+
+.color1 {
+    .mix(20)
+}
+
+// true 关键字
+.mix1() {
+    font-weight: 500;
+}
+
+.mix1(@a) when (@a) {
+    color: red;
+}
+
+.mix1(@a) when (@a=true) {
+    font-size: 12px;
+}
+
+// 不会匹配任何混合 包括mix1
+.color2 {
+    .mix1(30)
+}
+
+.color3 {
+    .mix1(true)
+}
+
+// 多个表达式
+// 使用逗号‘,’分隔。如果其中任意一个表达式的结果为 true，则匹配成功，这就相当于“或”的关系 
+.mix2(@a) when(@a>20),
+(@a<-1) {
+    color: red
+}
+
+
+// 使用 and 和 not 来进行逻辑运算
+.mix3(@a) when(@a>20) and (@a<30) {
+    color: red
+}
+
+.color4 {
+    .mix2(-2);
+}
+
+.color5 {
+    .mix3(21);
+}
+
+// 如果想基于值的类型、或特定的单位进行匹配，就可以使用 is* 函数
+
+.mix4(@a) when (Isnumber(@a)) {
+    color: red
+}
+
+.color6 {
+    .mix4(5)
+}
+
+.color7 {
+    .mix4('5')
+}

@@ -1,0 +1,41 @@
+// 传统写法
+.header {
+  width: 900px;
+  h1 {
+    color: #fff;
+  }
+  h2 {
+    color: pink;
+    // 父元素选择器
+    &:hover {
+      font-size: 14px;
+    }
+  }
+}
+
+// &放到当前选择器之后 会将当前选择器插入父选择器之前
+
+.a {
+  color: blue;
+  .b {
+    color: pink;
+    .c & {
+      color: red;
+    }
+    & & {
+      color: yellow;
+    }
+  }
+}
+
+.e,
+.f,
+.h {
+  & {
+    color: red;
+  }
+  // 全部可能组合
+  & & {
+    color: yellow;
+  }
+}

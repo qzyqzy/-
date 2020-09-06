@@ -1,0 +1,10 @@
+// 在混合集后面添加 !important关键字 集合里的所有属性都会被添加
+
+.mix() {
+    color: pink;
+    font-size: 12px;
+}
+
+.title {
+    .mix() !important;
+}

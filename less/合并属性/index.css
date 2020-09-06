@@ -1,0 +1,9 @@
+.pad {
+  padding: 5px, 6px;
+}
+.pad1 {
+  padding: 5px 6px;
+}
+.pad2 {
+  padding: 5px 6px, 7px 8px, 9px;
+}

@@ -1,0 +1,27 @@
+// 组织结构或仅仅是为了提供一些封装的目的，你希望对混合（mixins）进行分组
+
+.bg() {
+    background-color: pink;
+
+    .title {
+        background-color: #000;
+    }
+
+    .footer {
+        background-color: #fff;
+    }
+}
+
+.h1 {
+    .bg
+}
+
+// > 或者 . 两种写法都可以
+// .title 或者 .title() 都可以
+.h2 {
+    .bg>.title()
+}
+
+.h3 {
+    .bg>.footer()
+}

@@ -1,0 +1,22 @@
+// 一个混合递归调用自身，再结合 guard 表达式和模式匹配这两个特性，就可以写出循环结构
+// 输出四个 padding 属性
+
+.loop(@i) when(@i>0) {
+    .loop(@i - 1);
+    padding: 5px*@i
+}
+
+.pad {
+    .loop(4)
+}
+
+// 生成 12-15的字体大小
+.font(@i) when (@i<=15) {
+    .f@{i} {
+        font-size: @i+0px;
+    }
+
+    .font(@i+1)
+}
+
+.font(12);

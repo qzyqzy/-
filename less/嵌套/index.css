@@ -1,0 +1,40 @@
+.header {
+  width: 900px;
+}
+.header h1 {
+  color: #fff;
+}
+.header h2 {
+  color: pink;
+}
+.header h2:hover {
+  font-size: 14px;
+}
+.a {
+  color: blue;
+}
+.a .b {
+  color: pink;
+}
+.c .a .b {
+  color: red;
+}
+.a .b .a .b {
+  color: yellow;
+}
+.e,
+.f,
+.h {
+  color: red;
+}
+.e .e,
+.e .f,
+.e .h,
+.f .e,
+.f .f,
+.f .h,
+.h .e,
+.h .f,
+.h .h {
+  color: yellow;
+}

@@ -1,0 +1,35 @@
+// + 以逗号合并属性值
+.mix() {
+    padding+: 5px;
+}
+
+.pad {
+    .mix();
+    padding+: 6px;
+}
+
+// +_ 以空格合并属性值
+.mix1() {
+    padding+_: 5px;
+}
+
+.pad1 {
+    .mix1();
+    padding+_: 6px;
+}
+
+// 多种规则时
+.mix2() {
+    padding+_: 5px;
+}
+
+// padding: 5px 6px, 7px 8px, 9px;
+.pad2 {
+    .mix2();
+    // padding+_: 5px;
+
+    padding+_: 6px;
+    padding+: 7px;
+    padding+_: 8px;
+    padding+: 9px;
+}

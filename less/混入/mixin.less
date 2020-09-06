@@ -1,0 +1,133 @@
+// 普通混合
+.title{
+    font-weight: 700;
+    color:red;
+}
+.nav a{
+    text-align: center;
+    .title;
+    
+}
+.footer a{
+    .title();
+     text-align: left;
+}
+
+// 不会输出的混合 后面定义圆括号()
+.title1(){
+    font-weight: 700;
+    color:red;
+}
+
+.content p{
+    .title1
+}
+
+// 带选择器的混合
+.ele-hover(){
+    &:hover{
+        color:red;
+    }
+}
+
+.button{
+    .ele-hover();
+}
+
+// 带参数的混合
+.border-c(@color){
+    border: 1px solid @color;
+}
+
+.div{
+    .border-c(red);
+}
+
+// 带默认值的混合
+.border-size(@size:10px){
+    border:@size solid #000;
+}
+
+.div-b{
+    .border-size()
+}
+
+// 带多参数的混合 参数可以使用逗号或分号分隔
+.margin(@fontSize,@margin:5px){
+    font-size: @fontSize;
+    margin: @margin;
+}
+.div-margin{
+    .margin(10px);
+}
+.div-margin1{
+    .margin(10px,6px);
+}
+.div-margin2{
+    .margin(10px;7px);
+}
+// 推荐使用分号 因为逗号存在分隔
+// 当全部为逗号时 按值传递
+// 当存在逗号与分号时 会将分号前的当做一个值
+.div-margin3{
+    .margin(10px,7px;8px);
+}
+
+
+// 定义多个相同名称的mixins
+.mixins-more(@color){
+    color: @color;
+}
+.mixins-more(@color;@size:10px){
+    font-size: @size
+}
+// 可以显示的都会显示
+.div-more{
+    .mixins-more(red)
+}
+
+// 命名参数
+.mixins2(@color:red;@size:10px){
+    color: @color;
+    font-size: @size;
+}
+
+// 直接填写值的还是按位置传值 
+.div-mix2{
+    .mixins2(@size:20px);
+    .mixins2(30px);
+}
+
+// @arguments变量
+.mixins3(@s:solid;@color:red){
+    border:1px @arguments;
+}
+
+// 直接填写值的还是按位置传值 
+.div-mix3{
+    .mixins3()
+}
+
+// 匹配模式
+.mixins4('b_t',@val:10px){
+    border-bottom: @val;
+}
+.mixins4('b_l',@val:10px){
+    border-left: @val;
+}
+
+.div-mix4{
+    .mixins4('b_l',20px)
+}
+
+// 混合中的返回值
+.mixins5(@x,@y){
+    @padding:(@x+@y)/2;
+}
+
+.div-mix5{
+    .mixins5(10px,20px);
+    margin:@padding;
+}
+
+
